@@ -1,0 +1,2 @@
+# exception
+Generic exception classes
