@@ -1,0 +1,20 @@
+{
+    "name": "piece-of-kake/exception",
+    "description": "Generic exception classes",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sasa Andjelic",
+            "email": "sasasmail@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0 || ^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoK\\Exception\\": "src/"
+        }
+    }
+}
