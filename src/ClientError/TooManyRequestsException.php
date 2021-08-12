@@ -2,6 +2,8 @@
 
 namespace PoK\Exception\ClientError;
 
+use PoK\Exception\HasDataInterface;
+
 /**
  * The 429 status code indicates that the user has sent too many requests in a given amount of time ("rate limiting").
  * The response representations SHOULD include details explaining the condition, and MAY include a Retry-After header
@@ -11,10 +13,23 @@ namespace PoK\Exception\ClientError;
  * Therefore, servers are not required to use the 429 status code; when limiting resource usage, it may be more
  * appropriate to just drop connections, or take other steps.
  */
-class TooManyRequestsException extends \Exception
+class TooManyRequestsException extends \Exception implements HasDataInterface
 {
+    /**
+     * @var int
+     */
+    private $cooldown;
+
     public function __construct(int $cooldown, \Throwable $previous = NULL)
     {
-        parent::__construct($cooldown, 429, $previous);
+        parent::__construct('TOO_MANY_REQUESTS', 429, $previous);
+        $this->cooldown = $cooldown;
+    }
+
+    public function getData()
+    {
+        return [
+            'cooldown' => $this->cooldown
+        ];
     }
 }
